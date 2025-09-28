@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main   # whenever you push to main, run this workflow
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Get your repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js (v20 here, you can change to 18 if needed)
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build your project
+      - name: Build
+        run: npm run build
+
+      # 5. Ensure the CNAME file gets copied into dist
+      - name: Ensure CNAME present (for custom domain)
+        run: |
+          if [ -f public/CNAME ]; then cp public/CNAME dist/CNAME; fi
+
+      # 6. Deploy dist/ to gh-pages branch
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
