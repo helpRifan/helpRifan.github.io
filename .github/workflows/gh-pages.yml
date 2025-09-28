@@ -6,7 +6,7 @@ on:
       - main   # whenever you push to main, run this workflow
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
