@@ -95,7 +95,7 @@ const Contact = () => {
     {
       name: "Instagram",
       icon: <Instagram className="w-6 h-6" />,
-      url: "https://www.instagram.com/rifanstfu/",
+      url: "",
       color: "hover:text-pink-400",
     },
     {
