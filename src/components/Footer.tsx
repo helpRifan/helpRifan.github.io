@@ -15,7 +15,7 @@ const Footer = () => {
     {
       name: "Instagram",
       icon: <Instagram className="w-5 h-5" />,
-      url: "https://www.instagram.com/rifanstfu/",
+      url: "",
     },
     {
       name: "Email",
