@@ -51,6 +51,8 @@ npm run dev
 
 This will start the application on `http://localhost:8080`.
 
+**Note:** Do not try to open `index.html` directly in your browser or serve the root directory with a simple static server. This will cause a "Failed to load module script" error because browsers cannot execute `.tsx` files directly. Always use `npm run dev` for development.
+
 ### Building for Production
 
 To create a production-ready build, run:
@@ -60,3 +62,19 @@ npm run build
 ```
 
 The built files will be located in the `dist/` directory.
+
+### Previewing Production Build
+
+To preview the production build locally:
+
+```sh
+npm run preview
+```
+
+## 🐛 Troubleshooting
+
+### "Failed to load module script... MIME type of 'application/octet-stream'"
+
+If you see this error:
+1.  **Local Development:** Ensure you are using `npm run dev`. Do not use a generic file server (like `python -m http.server`) on the root directory.
+2.  **Deployment:** Ensure you are deploying the `dist` folder, not the source code. If using GitHub Pages, make sure your repository settings are pointing to the `gh-pages` branch (if using the `gh-pages.yml` workflow) or utilizing the GitHub Actions source (if using `deploy.yml`).
